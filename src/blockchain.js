@@ -9,17 +9,23 @@ class Block {
         this.hash = this.hashFunction();
         this.nonce = 0;
     }
-    hashFunction = () => {
-        SHA256(this.index + this.timeStamp + this.data + this.precedingHash + this.nonce).toString();
+    hashFunction(){
+        return SHA256(this.index + this.timeStamp + this.precedingHash + JSON.stringify(this.data) + this.nonce).toString();
+    };
+    proofOfWork(){
+        while(this.hash.substring(0, difficulty) !== Array(difficulty + 1).join("0")){
+            this.nonce ++;
+            this.hash = this.hashFunction();
+        };
     };
 };
 
 class CryptoChain {
     constructor(){
-        this.chain = [createChain()];
+        this.chain = [this.createChain()];
     }
 
-    createChain(){
+    createChain = () => {
         return new Block(0, '1/18/2021', 'First Block on the Chain', '0');
     };
 
@@ -28,10 +34,34 @@ class CryptoChain {
     };
 
     addBlock(newBlock){
-        newBlock.precedingHash = newestBlock().hash;
-        newBlock.hash = newBlock.hashFunction();
-        this.chain.push(newBlock)
+        newBlock.precedingHash = this.newestBlock().hash;
+        // newBlock.hash = newBlock.hashFunction();
+        newBlock.proofOfWork(this.difficulty);
+        this.chain.push(newBlock);
+    };
+
+    checkValidity(){
+        for(let i = 1; i < this.chain.length; i++){
+            const currentBlock = this.chain[i];
+            const prevBlock = this.chain[i - 1];
+
+            if(currentBlock.hash !== currentBlock.hashFunction()){
+                return false;
+            }
+            if(currentBlock.precedingHash !== prevBlock.hash){
+                return false;
+            };
+            return true;
+        };
     };
 };
 
-export default CryptoChain;
+let testBlockChain = new CryptoChain();
+testBlockChain.addBlock(new Block(1, '1/18/2021', {sender: 'Kaido', amount: 234}));
+testBlockChain.addBlock(new Block(2, '1/18/2021', {sender: 'Umber', amount: 90}));
+testBlockChain.addBlock(new Block(3, '1/18/2021', {sender: 'Ana', amount: 6741}));
+testBlockChain.addBlock(new Block(4, '1/18/2021', {sender: 'Dillon', amount: 1234}));
+
+console.log(testBlockChain);
+
+console.log('Is blockchain valid', testBlockChain.checkValidity());
