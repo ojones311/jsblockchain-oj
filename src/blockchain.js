@@ -11,23 +11,27 @@ class Block {
     }
     hashFunction = () => {
         SHA256(this.index + this.timeStamp + this.data + this.precedingHash + this.nonce).toString();
-    }
-}
+    };
+};
 
 class CryptoChain {
     constructor(){
-        this.chain = createChain()
+        this.chain = [createChain()];
     }
 
     createChain(){
-        return new Block(0, '1/18/2021', 'First Block on the Chain', '0')
-    }
+        return new Block(0, '1/18/2021', 'First Block on the Chain', '0');
+    };
 
     newestBlock(){
-        return this.chain[this.chain.length -1]
-    }
+        return this.chain[this.chain.length -1];
+    };
 
     addBlock(newBlock){
-        
-    }
-}
+        newBlock.precedingHash = newestBlock().hash;
+        newBlock.hash = newBlock.hashFunction();
+        this.chain.push(newBlock)
+    };
+};
+
+export default CryptoChain;
