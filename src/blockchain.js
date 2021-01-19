@@ -12,7 +12,7 @@ class Block {
     hashFunction(){
         return SHA256(this.index + this.timeStamp + this.precedingHash + JSON.stringify(this.data) + this.nonce).toString();
     };
-    proofOfWork(){
+    proofOfWork(difficulty){
         while(this.hash.substring(0, difficulty) !== Array(difficulty + 1).join("0")){
             this.nonce ++;
             this.hash = this.hashFunction();
@@ -23,6 +23,7 @@ class Block {
 class CryptoChain {
     constructor(){
         this.chain = [this.createChain()];
+        this.difficulty = 2
     }
 
     createChain = () => {
@@ -57,6 +58,7 @@ class CryptoChain {
 };
 
 let testBlockChain = new CryptoChain();
+console.log('Mining please wait')
 testBlockChain.addBlock(new Block(1, '1/18/2021', {sender: 'Kaido', amount: 234}));
 testBlockChain.addBlock(new Block(2, '1/18/2021', {sender: 'Umber', amount: 90}));
 testBlockChain.addBlock(new Block(3, '1/18/2021', {sender: 'Ana', amount: 6741}));
@@ -65,3 +67,8 @@ testBlockChain.addBlock(new Block(4, '1/18/2021', {sender: 'Dillon', amount: 123
 console.log(testBlockChain);
 
 console.log('Is blockchain valid', testBlockChain.checkValidity());
+
+module.exports = {
+    CryptoChain,
+    Block
+};
