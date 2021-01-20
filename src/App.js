@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
       <h1>BlockChain Visualizer</h1>
-      <Visulaizer />
+      <Visualizer />
     </div>
   );
 }
