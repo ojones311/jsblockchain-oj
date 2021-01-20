@@ -1,10 +1,13 @@
 import React from 'react'
 
 
-const CryptoBlock = ({hash, data}) => {
+const CryptoBlock = ({info}) => {
     return (
         <div>
-            <h1>Block 1</h1>
+            <h1>Block {info.index}</h1>
+            <p>{info.timestamp}</p>
+            <p>{info.hash}</p>
+            <p>{info.data}</p>
         </div>
     )
 }

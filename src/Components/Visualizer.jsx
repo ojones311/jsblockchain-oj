@@ -1,29 +1,36 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState, useMemo} from 'react'
 import CryptoBlock from '../Components/CryptoBlock'
 import blockChain from '../blockchain.js'
 
 const Visualizer = () => {
     const cryptoChain = blockChain.CryptoChain
-    let chain = new blockChain.CryptoChain()
+    const block = blockChain.Block
+    let chain = new cryptoChain()
 
-    const renderEachBlock = () => {
+    // const memoizedValue = useMemo(chain,[chain])
+
+    const renderBlockChain = () => {
         console.log(chain)
-        if(chain){
-            crypto.map((elem) => {
-                return <CryptoBlock hash={''} data={''}/>
+        if(chain.chain.length > 1){
+            chain.chain.map((elem) => {
+                return <CryptoBlock info={elem}/>
             })
         }  
     }
 
-    const getBlockChain = () => {
-        setChain(chain)
+    const addBlock = (index, timestamp, data, precedingHash) => {
+        return chain.addBlock( new block(index, timestamp, data, precedingHash))
     }
-    
+
+    // useEffect(() => {
+    //     console.log(chain)
+    // },[chain])
 
     const [crypto, setChain] = useState([])
     return(
         <div>
-            <button onClick={() => getBlockChain()}>Return</button>
+            <button onClick={() => renderBlockChain()}>Return</button>
+            {/* {renderBlockChain()} */}
         </div>
 
     )
