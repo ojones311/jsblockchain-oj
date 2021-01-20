@@ -1,5 +1,6 @@
 import React, {useEffect, useState, useMemo} from 'react'
 import CryptoBlock from '../Components/CryptoBlock'
+import AddBlockForm from '../Components/AddBlockForm'
 import blockChain from '../blockchain.js'
 
 const Visualizer = () => {
@@ -28,9 +29,10 @@ const Visualizer = () => {
 
     const [crypto, setChain] = useState([])
     return(
-        <div>
+        <div className='visualizer'>
+            <AddBlockForm />
             <button onClick={() => renderBlockChain()}>Return</button>
-            {/* {renderBlockChain()} */}
+            {renderBlockChain()}
         </div>
 
     )
