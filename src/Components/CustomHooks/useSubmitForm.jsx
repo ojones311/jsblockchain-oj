@@ -1,16 +1,21 @@
-import React,{useState} from 'react'
+import {useState} from 'react'
+import AddBlockForm from '../AddBlockForm'
 
-const useSubmitForm = () => {
-   const [values, setValue] =  useState({})
+const useSubmitForm = (callback) => {
+   const [values, setValue] = useState({})
    
    const handleFormSubmit = (e) => {
     e.preventDefault()
+    callback()
     console.log('Form was submitted')
+    setValue({})
    }
    const handleFormChange = (e) => {
     e.persist()
     setValue(values => ({...values, [e.target.name]:e.target.value}));
+   //  console.log(values)
    }
+
    return {
       handleFormSubmit,
       handleFormChange,
