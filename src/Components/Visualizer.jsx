@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import CryptoBlock from '../Components/CryptoBlock'
 import AddBlockForm from '../Components/AddBlockForm'
 import blockChain from '../blockchain.js'
@@ -10,18 +10,18 @@ const Visualizer = () => {
 
     const renderBlockChain = () => {
         console.log(crypto)
-        // if(chain.chain.length > 1){
-        //     chain.chain.map((elem) => {
-        //         return <CryptoBlock info={elem}/>
-        //     })
-        // }  
+        crypto.chain.map((elem) => {
+            return <CryptoBlock info={elem}/>
+        })  
     }
-
     const [crypto, setChain] = useState(chain)
-    console.log('crypto',crypto)
+
+    useEffect(renderBlockChain ,[crypto])
+
     return(
         <div className='visualizer'>
             <AddBlockForm chain={chain} block={block}/>
+            {renderBlockChain()}
         </div>
 
     )

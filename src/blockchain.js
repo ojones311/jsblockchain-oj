@@ -58,14 +58,14 @@ class CryptoChain {
 };
 
 
-let testBlockChain = new CryptoChain()
-console.log('Mining please wait')
-testBlockChain.addBlock(new Block(1, '1/18/2021', {sender: 'Kaido', amount: 234}));
+// let testBlockChain = new CryptoChain()
+// console.log('Mining please wait')
+// testBlockChain.addBlock(new Block(1,'1/18/2021', {sender: 'Kaido', amount: 234}));
 // testBlockChain.addBlock(new Block(2, '1/18/2021', {sender: 'Umber', amount: 90}));
 // testBlockChain.addBlock(new Block(3, '1/18/2021', {sender: 'Ana', amount: 6741}));
 // testBlockChain.addBlock(new Block(4, '1/18/2021', {sender: 'Dillon', amount: 1234}));
 
-console.log(testBlockChain);
+// console.log(testBlockChain);
 
 // console.log('Is blockchain valid', testBlockChain.checkValidity());
 
