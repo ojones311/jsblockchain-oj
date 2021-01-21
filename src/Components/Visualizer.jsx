@@ -19,10 +19,6 @@ const Visualizer = () => {
         }  
     }
 
-    const addBlock = (index, timestamp, data, precedingHash) => {
-        return chain.addBlock( new block(index, timestamp, data, precedingHash))
-    }
-
     // useEffect(() => {
     //     console.log(chain)
     // },[chain])
@@ -30,9 +26,9 @@ const Visualizer = () => {
     const [crypto, setChain] = useState([])
     return(
         <div className='visualizer'>
-            <AddBlockForm />
-            <button onClick={() => renderBlockChain()}>Return</button>
-            {renderBlockChain()}
+            <AddBlockForm chain={chain} block={block}/>
+            {/* <button onClick={() => renderBlockChain()}>Return</button> */}
+            {/* {renderBlockChain()} */}
         </div>
 
     )

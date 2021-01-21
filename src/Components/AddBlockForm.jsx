@@ -1,15 +1,20 @@
 import React from 'react'
+import useSubmitForm from '../Components/CustomHooks/useSubmitForm'
 
+const AddBlockForm = ({chain, block}) => {
 
-const AddBlockForm = () => {
+    const addBlock = (index, timestamp, data, precedingHash) => {
+        return chain.addBlock( new block(index, timestamp, data, precedingHash))
+    }
+    const {values, handleFormChange, handleFormSubmit} = useSubmitForm()
     return (
         <div className='form'>
-            <form>
-                <label>Username</label>
-                <input type="text"/>
-                <label> Data</label>
-                <input type="password"/>
-                <button type="password">Add Block</button>
+            <form onSubmit={handleFormSubmit}>
+                <label>Sender</label>
+                <input type="text" name='name'onChange={handleFormChange} required/>
+                <label> Amount</label>
+                <input type="text" name='amount'onChange={handleFormChange} required/>
+                <button onClick={() => addBlock()}>Add Block</button>
             </form>
         </div>
     )
