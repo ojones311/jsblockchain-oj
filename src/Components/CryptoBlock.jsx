@@ -1,13 +1,14 @@
 import React from 'react'
-
+import '../Components/Styles/CryptoBlock.css'
 
 const CryptoBlock = ({info}) => {
     return (
-        <div>
-            <h1>Block {info.index}</h1>
+        <div className='cryptoblock'>
+            <h4>Block {info.index}</h4>
             <p>{info.timestamp}</p>
             <p>{info.hash}</p>
-            <p>{info.data}</p>
+            <p>{info.data.sender}</p>
+            <p>{info.data.amount}</p>
         </div>
     )
 }

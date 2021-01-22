@@ -1,8 +1,8 @@
 const SHA256 = require('crypto-js/sha256')
 
 class Block {
-    constructor(index, timeStamp, data, precedingHash){
-        this.index = index;
+    constructor(timeStamp, data, precedingHash){
+        this.index = 0;
         this.timeStamp = timeStamp;
         this.data = data;
         this.precedingHash = precedingHash;
@@ -27,14 +27,19 @@ class CryptoChain {
     }
 
     createChain = () => {
-        return new Block(0, '1/18/2021', 'First Block on the Chain', '0');
+        return new Block('1/18/2021', 'First Block on the Chain', '0');
     };
 
     newestBlock(){
         return this.chain[this.chain.length -1];
     };
 
+    currentIndex(){
+        return this.chain.length
+    };
+
     addBlock(newBlock){
+        newBlock.index = this.currentIndex()
         newBlock.precedingHash = this.newestBlock().hash;
         // newBlock.hash = newBlock.hashFunction();
         newBlock.proofOfWork(this.difficulty);
@@ -59,11 +64,11 @@ class CryptoChain {
 
 
 // let testBlockChain = new CryptoChain()
-// console.log('Mining please wait')
-// testBlockChain.addBlock(new Block(1,'1/18/2021', {sender: 'Kaido', amount: 234}));
-// testBlockChain.addBlock(new Block(2, '1/18/2021', {sender: 'Umber', amount: 90}));
-// testBlockChain.addBlock(new Block(3, '1/18/2021', {sender: 'Ana', amount: 6741}));
-// testBlockChain.addBlock(new Block(4, '1/18/2021', {sender: 'Dillon', amount: 1234}));
+console.log('Mining please wait')
+// testBlockChain.addBlock(new Block('1/18/2021', {sender: 'Kaido', amount: 234}));
+// testBlockChain.addBlock(new Block('1/18/2021', {sender: 'Umber', amount: 90}));
+// testBlockChain.addBlock(new Block('1/18/2021', {sender: 'Ana', amount: 6741}));
+// testBlockChain.addBlock(new Block('1/18/2021', {sender: 'Dillon', amount: 1234}));
 
 // console.log(testBlockChain);
 
