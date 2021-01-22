@@ -13,18 +13,23 @@ const Visualizer = () => {
         let visualization = crypto.chain.map((elem) => {
             return <CryptoBlock key={elem.index} info={elem}/>
         })  
+        console.log(visualization)
         return visualization
     }
+    
     const [crypto, setChain] = useState(chain)
 
     useEffect(() => {
         renderBlockChain() 
-    },[crypto])
+        console.log(chain.chain)
+    },chain.chain)
 
+    // console.log(chain.chain)
+    // console.log(crypto)
     let renderMyBlockChain = renderBlockChain()
     return(
         <div className='visualizer'>
-            <AddBlockForm chain={chain} setChain={setChain} block={block}/>
+            <AddBlockForm chain={chain} setChain={setChain} block={block} />
             <div className='blockchain'>
                 {renderMyBlockChain}
             </div>
