@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import useSubmitForm from '../Components/CustomHooks/useSubmitForm'
 import '../Components/Styles/AddBlockForm.css'
 
-const AddBlockForm = ({chain, block, setChain}) => {
+const AddBlockForm = ({chain, block, setChain, renderBlockChain}) => {
     
+    const {values, handleFormChange, handleFormSubmit} = useSubmitForm(() => addBlock())
+
     const createTimeStamp = () => {
         let timestamp = new Date().toLocaleString()
         console.log(timestamp)
@@ -13,11 +15,12 @@ const AddBlockForm = ({chain, block, setChain}) => {
     const addBlock = (index, timestamp, data, precedingHash) => {
         let newTimeStamp = createTimeStamp()
         chain.addBlock( new block(newTimeStamp, values, precedingHash))
-       setChain(chain)
+        setChain(chain => chain)
     }
-   
-    const {values, handleFormChange, handleFormSubmit} = useSubmitForm(() => addBlock(values))
 
+    useEffect(() => {
+        console.log(chain)
+    })
     return (
         <div className='form'>
             <form onSubmit={handleFormSubmit}>

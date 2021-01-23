@@ -64,7 +64,7 @@ class CryptoChain {
 
 
 // let testBlockChain = new CryptoChain()
-console.log('Mining please wait')
+// console.log('Mining please wait')
 // testBlockChain.addBlock(new Block('1/18/2021', {sender: 'Kaido', amount: 234}));
 // testBlockChain.addBlock(new Block('1/18/2021', {sender: 'Umber', amount: 90}));
 // testBlockChain.addBlock(new Block('1/18/2021', {sender: 'Ana', amount: 6741}));
@@ -76,5 +76,6 @@ console.log('Mining please wait')
 
 module.exports = {
     CryptoChain,
-    Block
+    Block,
+    // testBlockChain
 };

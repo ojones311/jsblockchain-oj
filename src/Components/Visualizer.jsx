@@ -7,31 +7,31 @@ import '../Components/Styles/Visualizer.css'
 const Visualizer = () => {
     const cryptoChain = blockChain.CryptoChain
     const block = blockChain.Block
-    let chain = new cryptoChain()
+    let crypto = new cryptoChain()
+
+    const [chain, setChain] = useState(crypto)
 
     const renderBlockChain = () => {
-        let visualization = crypto.chain.map((elem) => {
-            return <CryptoBlock key={elem.index} info={elem}/>
+        let visualization = chain.chain.map((elem) => {
+            return (
+                 <CryptoBlock key={elem.index} info={elem}/>
+            )
         })  
-        console.log(visualization)
+        console.log('rendered',chain)
         return visualization
     }
+
     
-    const [crypto, setChain] = useState(chain)
-
     useEffect(() => {
-        renderBlockChain() 
-        console.log(chain.chain)
-    },chain.chain)
+        // renderBlockChain()
+        console.log(chain)
+    },[chain])
 
-    // console.log(chain.chain)
-    // console.log(crypto)
-    let renderMyBlockChain = renderBlockChain()
     return(
         <div className='visualizer'>
-            <AddBlockForm chain={chain} setChain={setChain} block={block} />
+            <AddBlockForm chain={chain} setChain={setChain} block={block} renderBlockChain={renderBlockChain}/>
             <div className='blockchain'>
-                {renderMyBlockChain}
+                {renderMyBlockChain()}
             </div>
         </div>
 
