@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import useSubmitForm from '../Components/CustomHooks/useSubmitForm'
 import '../Components/Styles/AddBlockForm.css'
 
